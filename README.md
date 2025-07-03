@@ -47,18 +47,20 @@ Each folder contains:
 
 You can track your progress like this:
 
-Total : 8
+Total : 9
 
-| Platform | Problem Name          | Language | Status | Link                                                  |
-| -------- | --------------------- | -------- | ------ | ----------------------------------------------------- |
-| LeetCode | Merge Strings Alternately              | Python   | ✅ Done | [🔗](https://leetcode.com/problems/merge-strings-alternately)           |
-| LeetCode | Q1. Partition String              | Python   | ✅ Done | [🔗](https://leetcode.com/contest/weekly-contest-456/problems/partition-string/)           |
-| LeetCode | 226. Invert Binary Tree              | Python   | ✅ Done | [🔗](https://leetcode.com/problems/invert-binary-tree/description/)           |
-| LeetCode | 2236. Root Equals Sum of Children              | Python   | ✅ Done | [🔗](https://leetcode.com/problems/root-equals-sum-of-children/description/)           |
-| LeetCode | 3330. Find the Original Typed String I              | Python   | ✅ Done | [🔗](https://leetcode.com/problems/find-the-original-typed-string-i/description/)           |
-| LeetCode | 1431. Kids With the Greatest Number of Candies           | Python   | ✅ Done | [🔗](https://leetcode.com/problems/kids-with-the-greatest-number-of-candies/description/)           |
-| LeetCode | 1071. Greatest Common Divisor of Strings             | Python   | ✅ Done | [🔗](https://leetcode.com/problems/greatest-common-divisor-of-strings/description/)           |
-| LeetCode | 1480. Running Sum of 1d Array             | Python   | ✅ Done | [🔗](https://leetcode.com/problems/running-sum-of-1d-array/description/)           |
+index | Platform | Problem Name          | Language | Status | Link                                                  |
+------| -------- | --------------------- | -------- | ------ | ----------------------------------------------------- |
+1| LeetCode | Merge Strings Alternately              | Python   | ✅ Done | [🔗](https://leetcode.com/problems/merge-strings-alternately)           |
+2| LeetCode | Q1. Partition String              | Python   | ✅ Done | [🔗](https://leetcode.com/contest/weekly-contest-456/problems/partition-string/)           |
+3| LeetCode | 226. Invert Binary Tree              | Python   | ✅ Done | [🔗](https://leetcode.com/problems/invert-binary-tree/description/)           |
+4| LeetCode | 2236. Root Equals Sum of Children              | Python   | ✅ Done | [🔗](https://leetcode.com/problems/root-equals-sum-of-children/description/)           |
+5| LeetCode | 3330. Find the Original Typed String I              | Python   | ✅ Done | [🔗](https://leetcode.com/problems/find-the-original-typed-string-i/description/)           |
+6| LeetCode | 1431. Kids With the Greatest Number of Candies           | Python   | ✅ Done | [🔗](https://leetcode.com/problems/kids-with-the-greatest-number-of-candies/description/)           |
+7| LeetCode | 1071. Greatest Common Divisor of Strings             | Python   | ✅ Done | [🔗](https://leetcode.com/problems/greatest-common-divisor-of-strings/description/)           |
+8| LeetCode | 1480. Running Sum of 1d Array             | Python   | ✅ Done | [🔗](https://leetcode.com/problems/running-sum-of-1d-array/description/)           |
+9| LeetCode | 1672. Richest Customer Wealth             | Python   | ✅ Done | [🔗](https://leetcode.com/problems/richest-customer-wealth/description/)           |
+
 
 
 
