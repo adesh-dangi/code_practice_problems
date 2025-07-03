@@ -47,7 +47,7 @@ Each folder contains:
 
 You can track your progress like this:
 
-Total : 7
+Total : 8
 
 | Platform | Problem Name          | Language | Status | Link                                                  |
 | -------- | --------------------- | -------- | ------ | ----------------------------------------------------- |
@@ -58,6 +58,8 @@ Total : 7
 | LeetCode | 3330. Find the Original Typed String I              | Python   | ✅ Done | [🔗](https://leetcode.com/problems/find-the-original-typed-string-i/description/)           |
 | LeetCode | 1431. Kids With the Greatest Number of Candies           | Python   | ✅ Done | [🔗](https://leetcode.com/problems/kids-with-the-greatest-number-of-candies/description/)           |
 | LeetCode | 1071. Greatest Common Divisor of Strings             | Python   | ✅ Done | [🔗](https://leetcode.com/problems/greatest-common-divisor-of-strings/description/)           |
+| LeetCode | 1480. Running Sum of 1d Array             | Python   | ✅ Done | [🔗](https://leetcode.com/problems/running-sum-of-1d-array/description/)           |
+
 
 
 
