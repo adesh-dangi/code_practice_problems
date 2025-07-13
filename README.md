@@ -60,6 +60,7 @@ index | Platform | Problem Name          | Language | Status | Link             
 7| LeetCode | 1071. Greatest Common Divisor of Strings             | Python   | ✅ Done | [🔗](https://leetcode.com/problems/greatest-common-divisor-of-strings/description/)           |
 8| LeetCode | 1480. Running Sum of 1d Array             | Python   | ✅ Done | [🔗](https://leetcode.com/problems/running-sum-of-1d-array/description/)           |
 9| LeetCode | 1672. Richest Customer Wealth             | Python   | ✅ Done | [🔗](https://leetcode.com/problems/richest-customer-wealth/description/)           |
+10| LeetCode | 1. Two Sum            | Python   | ✅ Done | [🔗](https://leetcode.com/problems/two-sum/description/)           |
 
 
 
