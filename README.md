@@ -63,6 +63,7 @@ index | Platform | Problem Name          | Language | Status | Link             
 10| LeetCode | 1. Two Sum            | Python   | ✅ Done | [🔗](https://leetcode.com/problems/two-sum/description/)           |
 11| LeetCode | 2410. Maximum Matching of Players With Trainers           | Python   | ✅ Done | [🔗](https://leetcode.com/problems/maximum-matching-of-players-with-trainers/description/)           |
 12| LeetCode | 455. Assign Cookies          | Python   | ✅ Done | [🔗](https://leetcode.com/problems/assign-cookies/description/)           |
+13| LeetCode | 3136. Valid Word         | Python   | ✅ Done | [🔗](https://leetcode.com/problems/valid-word)           |
 
 
 
