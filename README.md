@@ -64,6 +64,8 @@ index | Platform | Problem Name          | Language | Status | Link             
 11| LeetCode | 2410. Maximum Matching of Players With Trainers           | Python   | ✅ Done | [🔗](https://leetcode.com/problems/maximum-matching-of-players-with-trainers/description/)           |
 12| LeetCode | 455. Assign Cookies          | Python   | ✅ Done | [🔗](https://leetcode.com/problems/assign-cookies/description/)           |
 13| LeetCode | 3136. Valid Word         | Python   | ✅ Done | [🔗](https://leetcode.com/problems/valid-word)           |
+14| LeetCode | 1717. Maximum Score From Removing Substrings    | Python   | ✅ Done | [🔗](https://leetcode.com/problems/maximum-score-from-removing-substrings)           |
+
 
 
 
