@@ -66,6 +66,8 @@ index | Platform | Problem Name          | Language | Status | Link             
 13| LeetCode | 3136. Valid Word         | Python   | ✅ Done | [🔗](https://leetcode.com/problems/valid-word)           |
 14| LeetCode | 1717. Maximum Score From Removing Substrings    | Python   | ✅ Done | [🔗](https://leetcode.com/problems/maximum-score-from-removing-substrings)           |
 15 LeetCode | 1342. Number of Steps to Reduce a Number to Zero   | Python   | ✅ Done | [🔗](https://leetcode.com/problems/number-of-steps-to-reduce-a-number-to-zero/)           |
+14 LeetCode | 412. Fizz Buzz   | Python   | ✅ Done | [🔗](https://leetcode.com/problems/fizz-buzz/)           |
+
 
 
 
