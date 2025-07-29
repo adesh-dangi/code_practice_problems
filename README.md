@@ -68,6 +68,8 @@ index | Platform | Problem Name          | Language | Status | Link             
 15 LeetCode | 1342. Number of Steps to Reduce a Number to Zero   | Python   | ✅ Done | [🔗](https://leetcode.com/problems/number-of-steps-to-reduce-a-number-to-zero/)           |
 16 LeetCode | 412. Fizz Buzz   | Python   | ✅ Done | [🔗](https://leetcode.com/problems/fizz-buzz/)           |
 17 LeetCode | 876. Middle of the Linked List   | Python   | ✅ Done | [🔗](https://leetcode.com/problems/middle-of-the-linked-list/)           |
+18 LeetCode | 383. Ransom Note   | Python   | ✅ Done | [🔗](https://leetcode.com/problems/ransom-note/)           |
+
 
 
 
