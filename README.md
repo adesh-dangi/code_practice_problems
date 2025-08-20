@@ -65,11 +65,11 @@ index | Platform | Problem Name          | Language | Status | Link             
 12| LeetCode | 455. Assign Cookies          | Python   | ✅ Done | [🔗](https://leetcode.com/problems/assign-cookies/description/)           |
 13| LeetCode | 3136. Valid Word         | Python   | ✅ Done | [🔗](https://leetcode.com/problems/valid-word)           |
 14| LeetCode | 1717. Maximum Score From Removing Substrings    | Python   | ✅ Done | [🔗](https://leetcode.com/problems/maximum-score-from-removing-substrings)           |
-15 LeetCode | 1342. Number of Steps to Reduce a Number to Zero   | Python   | ✅ Done | [🔗](https://leetcode.com/problems/number-of-steps-to-reduce-a-number-to-zero/)           |
-16 LeetCode | 412. Fizz Buzz   | Python   | ✅ Done | [🔗](https://leetcode.com/problems/fizz-buzz/)           |
-17 LeetCode | 876. Middle of the Linked List   | Python   | ✅ Done | [🔗](https://leetcode.com/problems/middle-of-the-linked-list/)           |
-18 LeetCode | 383. Ransom Note   | Python   | ✅ Done | [🔗](https://leetcode.com/problems/ransom-note/)           |
-19 LeetCode | 1160. Find Words That Can Be Formed by Characters   | Python   | ✅ Done | [🔗](https://leetcode.com/problems/find-words-that-can-be-formed-by-characters/description/)           |
+15| LeetCode | 1342. Number of Steps to Reduce a Number to Zero   | Python   | ✅ Done | [🔗](https://leetcode.com/problems/number-of-steps-to-reduce-a-number-to-zero/)           |
+16| LeetCode | 412. Fizz Buzz   | Python   | ✅ Done | [🔗](https://leetcode.com/problems/fizz-buzz/)           |
+17| LeetCode | 876. Middle of the Linked List   | Python   | ✅ Done | [🔗](https://leetcode.com/problems/middle-of-the-linked-list/)           |
+18| LeetCode | 383. Ransom Note   | Python   | ✅ Done | [🔗](https://leetcode.com/problems/ransom-note/)           |
+19| LeetCode | 1160. Find Words That Can Be Formed by Characters   | Python   | ✅ Done | [🔗](https://leetcode.com/problems/find-words-that-can-be-formed-by-characters/description/)           |
 
 
 
