@@ -1,0 +1,536 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Parallax Cards - Fixed Navigation</title>
+  <style>
+    :root{
+      --cards:7;
+      --cardHeight:87vh;
+      --prallax-cardTopPadding:1.5em;
+      --cardGap:4vw;
+      --nav-w:56px;
+      --nav-gap:12px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background:#2E3537;
+      font-family:Inter, Arial, sans-serif;
+      -webkit-font-smoothing:antialiased;
+      color:#111;
+    }
+
+    .prallex-container{width:90%;margin:0 auto;position:relative;z-index:999;padding-top:20px;}
+    #prallax-cards{
+      list-style:none;padding:0;margin:0;
+      display:grid;grid-template-columns:1fr;
+      grid-template-rows:repeat(var(--cards), var(--cardHeight));
+      gap:var(--cardGap);
+      padding-bottom:calc(var(--cards) * var(--prallax-cardTopPadding));
+    }
+    
+    /* per-card index vars */
+    #prallax-card1{--index:1} #prallax-card2{--index:2} #prallax-card3{--index:3}
+    #prallax-card4{--index:4} #prallax-card5{--index:5} #prallax-card6{--index:6} #prallax-card7{--index:7} #prallax-card8{--index:8} 
+    
+    .prallax-card{
+      position:sticky;top:0;
+      padding-top:calc(var(--index,1) * var(--prallax-cardTopPadding));
+      will-change: transform, width;
+      transform-style:preserve-3d;
+      transform-origin: top center;
+      transition: transform 0.25s ease, width 0.25s ease;
+    }
+    .prallax-card-body{
+      margin:0 auto;height:650px;padding:30px;border-radius:40px;
+      box-shadow:0 12px 36px rgba(0,0,0,0.32);
+      display:flex;align-items:center;justify-content:center;
+      will-change: width, transform, filter;
+      transform-origin: center top;
+    }
+
+    /* colours */
+    #prallax-card1 .prallax-card-body{background:#52B2CF}
+    #prallax-card2 .prallax-card-body{background:#E5A36F}
+    #prallax-card3 .prallax-card-body{background:#9CADCE}
+    #prallax-card4 .prallax-card-body{background:#D4AFB9}
+    #prallax-card5 .prallax-card-body{background:#A3D39C}
+    #prallax-card6 .prallax-card-body{background:#F3B2D6}
+    #prallax-card7 .prallax-card-body{background:#FFD59E}
+
+
+    h2{font-size:clamp(1rem,2.2vw,2rem);margin:0;color:#111;text-align:center}
+
+    /* --- nav (right side) --- */
+    .card-nav {
+      position:fixed;
+      right:18px;
+      top:50%;
+      transform:translateY(-50%);
+      display:flex;
+      flex-direction:column;
+      gap:var(--nav-gap);
+      z-index:9999;
+      pointer-events:auto;
+    }
+    .card-nav button{
+      width:var(--nav-w);
+      height:var(--nav-w);
+      border-radius:999px;
+      border:0;
+      background:rgba(255,255,255,0.12);
+      color:#fff;
+      display:grid;
+      place-items:center;
+      cursor:pointer;
+      font-weight:600;
+      box-shadow:0 6px 18px rgba(0,0,0,0.28);
+      transition: transform .18s cubic-bezier(.2,.9,.2,1), background .12s;
+    }
+    .card-nav button:focus{outline:2px solid rgba(255,255,255,0.22)}
+    .card-nav button:hover{transform:translateY(-4px)}
+    .card-nav button.active{
+      background:linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.85));
+      color:#222;
+      transform:scale(1.06);
+      box-shadow:0 10px 26px rgba(0,0,0,0.34);
+    }
+    .card-nav .label{
+      font-size:11px;
+      margin-top:6px;
+      color:#fff;
+      text-align:center;
+      opacity:0.9;
+    }
+
+    /* responsive - hide nav on very small screens or move it slightly */
+    @media(max-width:640px){
+      .card-nav{ right:10px; gap:8px; }
+      :root{ --nav-w:44px; }
+    }
+    @media(max-width:420px){
+      .card-nav{ display:none; } /* hide to avoid blocking content */
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay-card" style="height: 800px; width: 100%; background-color: rgba(0, 255, 255, 0.176);"></div>
+  
+  <div class="prallex-container">
+    <ul id="prallax-cards">
+      <li class="prallax-card" id="prallax-card1"><div class="prallax-card-body"><h2>Card 1</h2></div></li>
+      <li class="prallax-card" id="prallax-card2"><div class="prallax-card-body"><h2>Card 2</h2></div></li>
+      <li class="prallax-card" id="prallax-card3"><div class="prallax-card-body"><h2>Card 3</h2></div></li>
+      <li class="prallax-card" id="prallax-card4"><div class="prallax-card-body"><h2>Card 4</h2></div></li>
+      <li class="prallax-card" id="prallax-card5"><div class="prallax-card-body"><h2>Card 5</h2></div></li>
+      <li class="prallax-card" id="prallax-card6"><div class="prallax-card-body"><h2>Card 6</h2></div></li>
+      <li class="prallax-card" id="prallax-card7"><div class="prallax-card-body"><h2>Card 7</h2></div></li>
+    </ul>
+  </div>
+
+  <!-- NAV -->
+  <div class="card-nav" role="navigation" aria-label="Card navigation">
+    <button data-target="1" aria-label="Go to card 1">1</button>
+    <button data-target="2" aria-label="Go to card 2">2</button>
+    <button data-target="3" aria-label="Go to card 3">3</button>
+    <button data-target="4" aria-label="Go to card 4">4</button>
+    <button data-target="5" aria-label="Go to card 5">5</button>
+    <button data-target="6" aria-label="Go to card 6">6</button>
+    <button data-target="7" aria-label="Go to card 7">7</button>
+
+  </div>
+
+<script>
+(function(){
+  const list = document.getElementById('prallax-cards');
+  const cards = Array.from(document.querySelectorAll('.prallax-card'));
+  if (!list||!cards.length) return;
+  const container = document.querySelector('.prallex-container');
+
+  // NAV
+  const nav = document.querySelector('.card-nav');
+  const navButtons = Array.from(nav.querySelectorAll('button[data-target]'));
+
+  // ====== TUNABLES ======
+  const DEPTH_STEP_PX = 44;
+  const SHRINK_DISTANCE = Math.round(window.innerHeight * 0.9);
+  const MIN_WIDTH_PCT = 0.45;
+  const PEEK_EXTRA_PX = 12;
+
+  const SPRING_STIFFNESS = 140;
+  const SPRING_DAMPING = 18;
+  const MAX_DT = 0.035;
+  // =======================
+
+  function getContainerInnerWidth(){
+    const style = getComputedStyle(container);
+    const padLeft = parseFloat(style.paddingLeft)||0;
+    const padRight = parseFloat(style.paddingRight)||0;
+    return Math.max(container.clientWidth - padLeft - padRight, 0);
+  }
+
+  const items = cards.map((card, idx) => {
+    const body = card.querySelector('.prallax-card-body');
+    const index = idx + 1;
+    card.dataset.index = index;
+    const rowTop = card.offsetTop;
+    const containerW = getContainerInnerWidth();
+
+    const s = {
+      width: containerW, v_width:0,
+      translateY:0, v_transY:0,
+      scale:1, v_scale:0,
+      brightness:1, v_brightness:0,
+      z:index
+    };
+    const t = Object.assign({}, s);
+
+    if (body){
+      body.style.width = containerW + 'px';
+      body.style.transform = 'translateY(0px) scale(1)';
+      body.style.filter = 'brightness(1)';
+    }
+
+    return { card, body, index, rowTop, s, t };
+  });
+
+  function recomputeRowTops(){ 
+    items.forEach(it => it.rowTop = it.card.offsetTop);
+  }
+
+  // FIXED: Better state management for navigation
+  let manualActiveIndex = null; // Track manually set active button
+  let suppressAutoActiveUntil = 0;
+  let isScrollingFromClick = false;
+function computeActiveIndex() {
+  const now = performance.now();
+  if (now < suppressAutoActiveUntil && manualActiveIndex !== null) return manualActiveIndex;
+  if (now >= suppressAutoActiveUntil) { 
+    manualActiveIndex = null; 
+    isScrollingFromClick = false; 
+  }
+
+  let activeIdx = 1; // fallback
+
+  for (let i = 0; i < items.length; i++) {
+    const rect = items[i].card.getBoundingClientRect();
+
+    // check if this card is "sitting on top"
+    const nextRect = (i + 1 < items.length) ? items[i + 1].card.getBoundingClientRect() : null;
+
+    if (rect.top <= 0) {
+      if (!nextRect || nextRect.top > 0) {
+        // ✅ only mark active when this card is on top
+        activeIdx = items[i].index;
+        break; // found the top card, no need to continue
+      }
+    }
+  }
+
+  return activeIdx;
+}
+
+function computeActiveIndex_old(){
+  const now = performance.now();
+  if (now < suppressAutoActiveUntil && manualActiveIndex !== null) return manualActiveIndex;
+  if (now >= suppressAutoActiveUntil){ manualActiveIndex = null; isScrollingFromClick = false; }
+
+  // default to first
+  let activeIdx = 1;
+
+  for (let i = 0; i < items.length; i++){
+    const rect = items[i].card.getBoundingClientRect();
+
+    // if it's the first card and it's visible at least a bit, keep it active
+    if (i === 0) {
+      if (rect.bottom > 0) {
+        activeIdx = items[i].index;
+        // continue loop because a lower card may already have touched its bottom
+      } else {
+        // first card completely scrolled past top, let loop decide next
+        continue;
+      }
+    }
+
+    // for any card after the first, check "touch previous card bottom" condition
+    if (i > 0) {
+      const prevRect = items[i - 1].card.getBoundingClientRect();
+      // When this card's top is <= previous card's bottom (touch or overlap), mark this as active.
+      if (rect.top <= prevRect.bottom) {
+        activeIdx = items[i].index;
+        // keep looping so we end up with the lowest card that satisfies the condition (live overlap)
+      } else {
+        // if this card hasn't touched prev's bottom, then no further cards will either (they are below),
+        // so we can break early — but only if we already have an activeIdx set from earlier checks.
+        if (activeIdx !== 1) break;
+      }
+    }
+  }
+
+  return activeIdx;
+}
+
+
+
+  // ACTIVE button tracking - improved
+  let currentActiveIndex = 1;
+  function updateActiveButton(activeIndex){
+    if (currentActiveIndex === activeIndex) return;
+    currentActiveIndex = activeIndex;
+    
+    navButtons.forEach(btn => {
+      const t = Number(btn.dataset.target);
+      if (t === activeIndex) {
+        btn.classList.add('active');
+      } else {
+        btn.classList.remove('active');
+      }
+    });
+    // console.log('Active button updated to', navButtons);
+  }
+
+  function updateTargets(){
+    const scrollY = window.scrollY || window.pageYOffset;
+    const containerWidth = getContainerInnerWidth();
+    const activeIndex = computeActiveIndex();
+
+    items.forEach((it) => {
+      const idx = it.index;
+      let tgtWidth = containerWidth;
+      let tgtTranslateY = 0;
+      let tgtScale = 1;
+      let tgtBrightness = 1;
+      let tgtZ = idx;
+
+      if (idx === activeIndex){
+        tgtWidth = containerWidth;
+        tgtTranslateY = 0;
+        tgtScale = 1;
+        tgtBrightness = 1;
+        // tgtZ = 2000;
+        tgtZ = idx;
+      } else if (idx < activeIndex){
+        const baseSteps = Math.max(0, activeIndex - idx - 1);
+        const passedPx = Math.max(0, scrollY - it.rowTop);
+        const frac = Math.min(1, passedPx / SHRINK_DISTANCE);
+        const totalShrinkPx = (baseSteps + frac + 1) * DEPTH_STEP_PX;
+        const minWidth = containerWidth * MIN_WIDTH_PCT;
+        tgtWidth = Math.max(containerWidth - totalShrinkPx, minWidth);
+        tgtTranslateY = Math.min(26, (baseSteps + frac + 1) * 6);
+        tgtScale = 1 - Math.min(0.22, (baseSteps + frac + 1) * 0.02);
+        tgtBrightness = Math.max(0.66, 1 - (baseSteps + frac + 1) * 0.07);
+        tgtZ = idx;
+      } else {
+        tgtWidth = containerWidth;
+        const belowSteps = idx - activeIndex;
+        const extraPeek = Math.min(PEEK_EXTRA_PX * belowSteps, 3 * PEEK_EXTRA_PX);
+        tgtTranslateY = extraPeek;
+        tgtScale = 1;
+        tgtBrightness = 1;
+        tgtZ = idx;
+      }
+
+      it.t.width = tgtWidth;
+      it.t.translateY = tgtTranslateY;
+      it.t.scale = tgtScale;
+      it.t.brightness = tgtBrightness;
+      it.t.z = tgtZ;
+    });
+
+    // sync active nav
+     // 🔥 only update nav if the index changed
+  if (activeIndex !== currentActiveIndex) {
+    updateActiveButton(activeIndex);
+  }
+  }
+
+  // spring integration
+  function stepSpring(value, vel, target, dt, stiffness, damping){
+    const f = stiffness * (target - value) - damping * vel;
+    const a = f;
+    vel += a * dt;
+    value += vel * dt;
+    return [value, vel];
+  }
+
+  let last = performance.now();
+  function tick(now){
+    let dt = (now - last) / 1000;
+    if (dt > MAX_DT) dt = MAX_DT;
+    last = now;
+
+    items.forEach(it => {
+      const s = it.s;
+      const t = it.t;
+      [s.width, s.v_width] = stepSpring(s.width, s.v_width, t.width, dt, SPRING_STIFFNESS, SPRING_DAMPING);
+      [s.translateY, s.v_transY] = stepSpring(s.translateY, s.v_transY, t.translateY, dt, SPRING_STIFFNESS * 0.9, SPRING_DAMPING * 0.95);
+      [s.scale, s.v_scale] = stepSpring(s.scale, s.v_scale, t.scale, dt, SPRING_STIFFNESS * 0.18, SPRING_DAMPING * 0.9);
+      [s.brightness, s.v_brightness] = stepSpring(s.brightness, s.v_brightness, t.brightness, dt, SPRING_STIFFNESS * 0.12, SPRING_DAMPING * 0.9);
+      s.z = t.z;
+
+      if (it.body){
+        it.body.style.width = Math.round(s.width) + 'px';
+        it.body.style.transform = `translateY(${s.translateY.toFixed(2)}px) scale(${s.scale.toFixed(4)})`;
+        it.body.style.filter = `brightness(${s.brightness.toFixed(3)})`;
+        it.card.style.zIndex = s.z;
+      }
+    });
+
+    requestAnimationFrame(tick);
+  }
+
+
+  function updateCardScales() {
+  const cards = document.querySelectorAll('.prallax-card');
+  const viewportHeight = window.innerHeight;
+
+  cards.forEach((card, i) => {
+    const rect = card.getBoundingClientRect();
+    const distanceFromTop = rect.top;
+
+    // If card is at the very top → full scale
+    if (distanceFromTop <= 0 && distanceFromTop > -rect.height) {
+      card.style.transform = `scale(1)`;
+      card.style.zIndex = 10;
+    } 
+    else if (distanceFromTop > 0) {
+      // Lower cards → shrink proportional to distance from top
+      const progress = Math.min(1, distanceFromTop / viewportHeight);
+      const scale = 0.85 + (0.15 * (1 - progress)); // shrink down to 0.85
+      card.style.transform = `scale(${scale})`;
+      card.style.zIndex = 5;
+    } else {
+      // Scrolled past top
+      card.style.transform = `scale(0.85)`;
+      card.style.zIndex = 1;
+    }
+  });
+}
+
+// Run on scroll + resize
+window.addEventListener('scroll', updateCardScales);
+window.addEventListener('resize', updateCardScales);
+
+// Run once on load
+updateCardScales();
+
+  // FIXED: Better scroll to card function
+  // let scroll_pos = {
+  //   // 1:820,
+  //   // 2:1445,
+  //   // 3:2070,
+  //   // 4:2695,
+  //   // 5:3320,
+  //   // 6:3945,
+  //   // 7:4570
+  // }
+  function computeScrollPositions(cardCount, base, step) {
+  const scroll_pos = {};
+  for (let i = 1; i <= cardCount; i++) {
+    scroll_pos[i] = base + (i - 1) * step;
+  }
+  return scroll_pos;
+}
+const scroll_pos = computeScrollPositions(cards.length, 820, 630);
+
+ function scrollToCard(index){
+    console.log("\n\n\n\n\n index", index);
+    const it = items.find(x => x.index === index);
+    if (!it) return;
+    var scroll_last_track = window.innerHeight;
+  // recompute positions right before we scroll (fixes new content above)
+  recomputeRowTops();
+  const rect = it.card.getBoundingClientRect();
+  // mark that we're scrolling from a click
+  isScrollingFromClick = true;
+  manualActiveIndex = index;
+  console.log(" card_h before", scroll_last_track, it);
+  
+  console.log(" card_h", scroll_last_track, " index passed ", index, " old index", old_top_index, "window.innerHeight ",window.innerHeight);
+
+  var targetY = scroll_pos[index] || 0;
+
+  window.scrollTo({ top: targetY, behavior: 'smooth' });
+ }
+
+  var old_top_index=1;
+  // FIXED: Better click handling
+  navButtons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      const idx = Number(btn.dataset.target);
+      // Immediately set this button as active
+      
+      manualActiveIndex = idx;
+      old_top_index = currentActiveIndex
+      // currentActiveIndex = idx;
+      updateActiveButton(idx);
+      
+      // Set suppression for longer duration
+      const SUPPRESS_MS = 1200;
+      suppressAutoActiveUntil = performance.now() + SUPPRESS_MS;
+      
+      // Scroll to the card
+      scrollToCard(idx);
+      btn.blur();
+    });
+  });
+
+  // FIXED: Better scroll event handling
+  let scrollTimeout = 0;
+  let lastScrollY = window.scrollY;
+  
+  window.addEventListener('scroll', () => {
+    const currentScrollY = window.scrollY;
+    
+    // If user manually scrolls (not from button click), clear suppression faster
+    if (!isScrollingFromClick && Math.abs(currentScrollY - lastScrollY) > 10) {
+      suppressAutoActiveUntil = 0;
+      manualActiveIndex = null;
+    }
+    
+    lastScrollY = currentScrollY;
+    
+    window.clearTimeout(scrollTimeout);
+    scrollTimeout = window.setTimeout(() => {
+      if (isScrollingFromClick) {
+        // Wait longer if scroll was from button click
+        suppressAutoActiveUntil = Math.min(suppressAutoActiveUntil, performance.now() + 300);
+      } else {
+        suppressAutoActiveUntil = 0;
+        manualActiveIndex = null;
+      }
+    }, 150);
+  }, { passive: true });
+
+  // ensure dynamic recalculation on resize/orientation/load
+  function safeRecompute(){ 
+    requestAnimationFrame(() => {
+      recomputeRowTops();
+      manualActiveIndex = null;
+      suppressAutoActiveUntil = 0;
+    });
+  }
+  window.addEventListener('resize', safeRecompute, { passive:true });
+  window.addEventListener('orientationchange', safeRecompute);
+  window.addEventListener('load', recomputeRowTops);
+
+  // Initialize first button as active
+  updateActiveButton(1);
+  scrollToCard(1);
+
+  // start loop
+  last = performance.now();
+  requestAnimationFrame(tick);
+
+  // expose for debug
+  window.__prl = { items, recomputeRowTops, DEPTH_STEP_PX, SHRINK_DISTANCE, MIN_WIDTH_PCT, PEEK_EXTRA_PX, SPRING_STIFFNESS, SPRING_DAMPING, MAX_DT, scrollToCard };
+
+})();
+</script>
+</body>
+</html>

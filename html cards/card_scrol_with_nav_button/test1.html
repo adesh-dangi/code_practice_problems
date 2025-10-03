@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sticky Card Nav Scroll</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background: #f0f0f0;
+    }
+    .nav {
+      position: fixed;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+      z-index: 1000;
+    }
+    .nav button {
+      padding: 6px 12px;
+      border: none;
+      border-radius: 4px;
+      background: #ddd;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .nav button.active {
+      background: #333;
+      color: #fff;
+    }
+    .cards {
+      position: relative;
+      width: 80%;
+      margin: 80px auto;
+    }
+    .card {
+      position: sticky;
+      top: 0;
+      margin-bottom: 30px;
+      height: 80vh;
+      border-radius: 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 48px;
+      font-weight: bold;
+      color: #fff;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+    }
+    .card:nth-child(1) { background: #e74c3c; }
+    .card:nth-child(2) { background: #3498db; }
+    .card:nth-child(3) { background: #27ae60; }
+    .card:nth-child(4) { background: #9b59b6; }
+    .card:nth-child(5) { background: #f39c12; }
+    .card:nth-child(6) { background: #2c3e50; }
+  </style>
+</head>
+<body>
+
+<div class="nav" id="nav"></div>
+
+<div class="cards" id="cards">
+  <div class="card">1</div>
+  <div class="card">2</div>
+  <div class="card">3</div>
+  <div class="card">4</div>
+  <div class="card">5</div>
+  <div class="card">6</div>
+</div>
+
+<script>
+const cards = Array.from(document.querySelectorAll('.card'));
+const nav = document.getElementById('nav');
+
+// build nav buttons
+cards.forEach((_, i) => {
+  const btn = document.createElement('button');
+  btn.textContent = i+1;
+  btn.addEventListener('click', () => scrollToCard(i+1));
+  nav.appendChild(btn);
+});
+const navButtons = Array.from(nav.querySelectorAll('button'));
+
+let items = cards.map((card, i) => ({ card, index: i+1, rowTop: card.offsetTop }));
+let currentActiveIndex = 1;
+let manualActiveIndex = null;
+let isScrollingFromClick = false;
+let suppressAutoActiveUntil = 0;
+
+function recomputeRowTops(){
+  items.forEach(it => it.rowTop = it.card.offsetTop);
+}
+
+function updateActiveButton(index){
+  navButtons.forEach((btn,i) => {
+    btn.classList.toggle('active', i+1 === index);
+  });
+}
+
+function easeInOutCubic(t){
+  return t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3)/2;
+}
+
+function animateScrollToY(targetY, duration = 420){
+  return new Promise((resolve) => {
+    const startY = window.scrollY || window.pageYOffset;
+    const delta = targetY - startY;
+    const startTime = performance.now();
+
+    function step(now){
+      const elapsed = now - startTime;
+      const t = Math.min(1, elapsed / duration);
+      const eased = easeInOutCubic(t);
+      window.scrollTo(0, Math.round(startY + delta * eased));
+      if (t < 1) requestAnimationFrame(step);
+      else setTimeout(resolve, 30); // let layout settle
+    }
+    requestAnimationFrame(step);
+  });
+}
+
+function sleep(ms){ return new Promise(r => setTimeout(r, ms)); }
+
+async function scrollToCard(index){
+  const it = items.find(x => x.index === index);
+  if (!it) return;
+
+  recomputeRowTops();
+  isScrollingFromClick = true;
+  manualActiveIndex = index;
+  suppressAutoActiveUntil = performance.now() + 1200;
+
+  const offsets = items.map(it => it.rowTop);
+  const startIndex = currentActiveIndex || 1;
+  const targetIndex = index;
+
+  if (targetIndex === startIndex){
+    updateActiveButton(targetIndex);
+    isScrollingFromClick = false;
+    manualActiveIndex = null;
+    return;
+  }
+
+  const stepDelay = 50;
+  const perStepDuration = 420;
+
+  if (targetIndex > startIndex){
+    // forward
+    for (let step = startIndex + 1; step <= targetIndex; step++){
+      const targetY = offsets[step - 1];
+      await animateScrollToY(targetY, perStepDuration);
+      currentActiveIndex = step;
+      updateActiveButton(currentActiveIndex);
+      await sleep(stepDelay);
+    }
+  } else {
+    // backward
+    for (let step = startIndex - 1; step >= targetIndex; step--){
+      let targetY = offsets[step - 1];
+      const cardElem = items[step - 1].card;
+      const overshoot = Math.min(Math.round(cardElem.offsetHeight * 0.12), 160);
+      targetY = Math.max(0, targetY - overshoot);
+
+      await animateScrollToY(targetY, perStepDuration);
+      currentActiveIndex = step;
+      updateActiveButton(currentActiveIndex);
+      await sleep(stepDelay);
+    }
+  }
+
+  isScrollingFromClick = false;
+  manualActiveIndex = null;
+  suppressAutoActiveUntil = performance.now() + 300;
+}
+
+// initialize
+updateActiveButton(1);
+</script>
+
+</body>
+</html>
